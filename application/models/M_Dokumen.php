@@ -31,7 +31,16 @@ class M_Dokumen extends CI_Model {
             } if ($Fetch !== $this->Code_UNAUTHORIZED) {
                 return $Fetch;
             }
-        } if ($key === "getDataByPK") {
+        } if ($key === "cekKode") {
+			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
+			$parsedBody['idGrup'] = $_SESSION['idGrup'];
+			$Fetch = $this->guzzle->API_Get('F_Dokumen/getAll', $parsedBody, $json);
+			if ($Fetch == $this->Code_UNAUTHORIZED) {
+				return $this->Code_UNAUTHORIZED;
+			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
+				return 200;
+			}
+		} if ($key === "getDataByPK") {
             $parsedBody['idUser'] = encode_str($_SESSION['idUser']);
             $Fetch = $this->guzzle->API_Get('F_Dokumen/getData/'.$value_pk, $parsedBody);
             if ($Fetch == $this->Code_UNAUTHORIZED) {

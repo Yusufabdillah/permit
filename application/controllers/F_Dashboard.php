@@ -25,11 +25,6 @@ class F_Dashboard extends MY_Controller
 		));
 	}
 
-	protected function load_models()
-	{
-		//$this->load->model();
-	}
-
 	/**
 	 * Diusahakan dalam pengambilan data hanya menggunakan satu fungsi get
 	 * dikarenakan fungsi get sudah memakai tabel view jadi tabel view sudah di LEFT JOIN
