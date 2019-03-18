@@ -206,10 +206,10 @@
 										<th style="text-align: center" width="20px">No</th>
 										<th style="text-align: center" width="20px">Aksi</th>
 										<th style="text-align: center" width="200px">Case Number</th>
-										<th style="text-align: center" width="200px">Judul Dokumen</th>
+										<th style="text-align: center" width="200px">Deskripsi Dokumen</th>
 										<th style="text-align: center" width="200px">Perusahaan (Site)</th>
 										<th style="text-align: center" width="150px">Instansi</th>
-										<th style="text-align: center" width="100px">Klasifikasi</th>
+										<!-- <th style="text-align: center" width="100px">Klasifikasi</th> -->
 										<th style="text-align: center" width="100px">Tanggal Terbit</th>
 										<th style="text-align: center" width="100px">Expired Dokumen</th>
 										<th style="text-align: center" width="100px">Jumlah Hari</th>
@@ -227,7 +227,7 @@
 												if (empty($cek)) {
 													?>
 													<a class="btn btn-md btn-primary"
-													   href="<?= site_url('F_Perpanjangan/formCreate/' . encode_str($data->idPengajuan)."/".encode_str($data->idDokumen)); ?>">
+													   href="<?= site_url('F_Perpanjangan/formCreate/' . encode_str($data->idDokumen)."/".encode_str($data->idPengajuan)); ?>">
 														<i class="fa fa-edit"></i>
 													</a>
 													<?php
@@ -239,10 +239,10 @@
 												?>
 											</td>
 											<td><?= $data->casenumberDokumen ?></td>
-											<td><?= $data->namaJudul . ' (' . $data->desk_judulDokumen . ')'; ?></td>
+											<td><?= $data->deskripsiDokumen; ?></td>
 											<td><?= $data->namaPerusahaan . ' - ' . $data->lokasiPerusahaan ?></td>
 											<td><?= $data->namaInstansi ?></td>
-											<td><?= $data->namaKlasifikasi ?></td>
+											<!-- <td><?//= $data->namaKlasifikasi ?></td> -->
 											<td><?= isset($data->tgl_mulai_berlakuDokumen) ? formatTanggal('-', $data->tgl_mulai_berlakuDokumen, true) : null ?></td>
 											<td><?= isset($data->tgl_habis_berlakuDokumen) ? formatTanggal('-', $data->tgl_habis_berlakuDokumen, true) : null ?></td>
 											<td><?= $data->rentang_hari_berlakuDokumen ?></td>

@@ -8,7 +8,36 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
-        /**
+		$('#TRIGGER_Submit').change(function () {
+			if(this.checked) {
+				//var data = $("#AJAX_exp_selamanyaDokumen").val();
+				$.ajax({
+					type: "POST",
+					url: "<?= site_url($this->router->fetch_class().'/AJAX')?>",
+					data: {
+						'fungsi' : 'toSubmit',
+						'status' : 'aktif'
+					},
+					success: function(msg){
+						$('#AJAX_Submit').html(msg);
+					}
+				});
+			} else if (!this.checked) {
+				$.ajax({
+					type: "POST",
+					url: "<?= site_url($this->router->fetch_class().'/AJAX')?>",
+					data: {
+						'fungsi' : 'toSubmit',
+						'status' : 'tidak_aktif'
+					},
+					success: function(msg){
+						$('#AJAX_Submit').html(msg);
+					}
+				});
+			}
+		});
+		
+		/**
          * Untuk Data Wilayah Dokumen
          */
         $('#AJAX_idNegara').change(function () {

@@ -56,7 +56,7 @@ class F_Perpanjangan extends MY_Controller
 			'http_kode' => $this->M_Dokumen->getDokumen('cekKode'),
 			'get_perusahaan' => $this->M_Perusahaan->getPerusahaan('getAll', null, null, null, false),
 			'get_dokumen' => $this->M_Dokumen->getDokumen(),
-			'get_cek_perpanjangan' => $cekPerpanjangan,
+			'get_cek_perpanjangan' => !empty($cekPerpanjangan) ? $cekPerpanjangan : null,
 			'get_pengajuan' => $this->M_Perpanjangan->getPerpanjangan('getDraft')
 		);
 		$this->template->frontend($this->VIEW_PATH . "/index", "Master Document", $data);
@@ -68,7 +68,7 @@ class F_Perpanjangan extends MY_Controller
      *
      * Alasan : Dikarenakan id di segment di encript oleh fungsi encode_str (helper)
      */
-	public function formCreate($idPengajuanByDok, $idDokumen)
+	public function formCreate($idDokumen, $idPengajuanByDok = null)
 	{
 		$data['get_idDokumen'] = decode_str($idDokumen);
 		$data['get_pengajuan'] = $this->M_Pengajuan->getPengajuan("getDataByPK", null, null, decode_str($idPengajuanByDok));
@@ -205,6 +205,14 @@ class F_Perpanjangan extends MY_Controller
 	public function AJAX()
 	{
 		$Fungsi = $this->input->post('fungsi');
+		if ($Fungsi == 'toSubmit') {
+			$data['status'] = $this->input->post('status');
+			if ($data['status'] == 'aktif') {
+				$data['get_koordinator'] = $this->M_User->getUser('getKoordinator');
+			}
+			$this->load->view('frontend/pengajuan/ajax_view/notif_submit', $data);
+		}
+
 		if ($Fungsi == 'indexSearch') {
 			$data['get_cek_perpanjangan'] = $this->M_Perpanjangan->getPerpanjangan('cekDokumenPerpanjangan');
 			$data['get_dokumen'] = $this->M_Dokumen->getDokumenPerpanjangan($_POST);

@@ -136,6 +136,10 @@ class M_Perpanjangan extends CI_Model {
 			$data['statusOSSPengajuan'] = isset($DATA_POST['statusOSSPengajuan']) ? 1 : 0;
 			$data['ktrDecline'] = '';
 
+			if (isset($DATA_POST['Notif_idUser'])) {
+				$this->notification->createMultiple($DATA_POST['Notif_idUser'], 'N100', $DATA_POST[$this->PK]);
+			}
+
 			$this->guzzle->API_Put('F_Pengajuan/put/', $data);
 			$RETURN_VALUE['PK'] = encode_str($DATA_POST[$this->PK]);
 			$RETURN_VALUE['PK_renewal'] = encode_str($DATA_POST['idPengajuan_renewal']);

@@ -1024,31 +1024,48 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group form-actions">
+						<div class="col-md-3">
+							<div class="form-group" style="margin-left: 10px">
+								<label>Submit</label>
+								<label
+									<?php
+									if ($this->router->fetch_method() == 'formCreate') {
+										?>
+										data-toggle="tooltip" data-placement="bottom" title="Draft dahulu pengajuan"
+										<?php
+									}
+									?>
+									class="switch switch-success">
+									<input
+										<?= $this->router->fetch_method() == 'formCreate' ? 'disabled' : null; ?>
+										type="checkbox" id="TRIGGER_Submit"><span></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group">
 								<div class="col-md-offset-9 col-md-3 btn-group">
 									<a href="<?= site_url('F_Perpanjangan/index'); ?>" class="btn btn-sm btn-warning"><i
 											class="fa fa-reply"></i> Kembali</a>
 									<button name="draft" type="submit" class="btn btn-sm btn-primary"><i
 											class="fa fa-save"></i> Draft
 									</button>
-									<?php
-									if (isset($get_pengajuan->idPengajuan) AND !isset($get_idDokumen)) {
-										?>
-										<button type="button" data-toggle="modal" data-target="#modalSubmit"
-												class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i> Submit
-										</button>
-										<?php
-									}
-									?>
 								</div>
 							</div>
 						</div>
 					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12" id="AJAX_Submit">
+							<hr>
+							<h5 class="text-center text-warning animation-fadeInQuickInv">
+								<i class="fa fa-info-circle"></i> Tombol submit dan notifikasi akan aktif bila status submit di aktifkan
+							</h5>
+							<hr>
+						</div>
+					</div>
 					<?php
-					if (isset($get_pengajuan->idPengajuan) AND !isset($get_idDokumen)) {
-						$this->load->view('frontend/perpanjangan/modalSubmit');
-					}
+					$this->load->view('frontend/perpanjangan/modalSubmit');
 					?>
 				</form>
 			</div>
